@@ -34,5 +34,5 @@ Please follow the instructions below to run or install the application:
 
 ### Live URL
 
-Open https://flexion.azurewebsites.net/
+Open https://fleexionstorageaccount.z13.web.core.windows.net/
 - 
