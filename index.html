@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function ToFahrenheit(inV,inUnit){
+            if( inUnit == 'celsius'){
+                return (inV * 9/5) + 32;
+            }
+            if( inUnit == 'kelvin'){
+                return (inV-273.15) * 9/5 + 32 ;
+            }
+            if( inUnit == 'rankine'){
+                return inV-459.67;
+            }
+        }
+        function ToKelvin(inV,inUnit){
+            if( inUnit == 'celsius'){
+                return inV + 273.15;
+            }
+            if( inUnit == 'fahrenheit'){
+                return (inV-32) * 5/9 + 273.15;
+            }
+            if( inUnit == 'rankine'){
+                return inV *5/9;
+            }
+        }
+
+        function ToCelsius(inV,inUnit){
+            if( inUnit == 'fahrenheit'){
+                return (inV-32) * 5/9;
+            }
+            if( inUnit == 'kelvin'){
+                return inV-273.15 ;
+            }
+            if( inUnit == 'rankine'){
+                return (inV - 491.67) * 5/9;
+            }
+        }
+
+        function ToRankine(inV,inUnit){
+            if( inUnit == 'fahrenheit'){
+                return inV +459.67;
+            }
+            if( inUnit == 'kelvin'){
+                return inV*1.8 ;
+            }
+            if( inUnit == 'celsius'){
+                return inV * 9/5 + 491.67 ;
+            }
+        }
+
+        function calResponse(i) {
+            console.log("Step 1");
+            var inputNValue=document.getElementById("inputNValue"+i).value;
+            var inputUnit=document.getElementById("inputUnit"+i).value;
+            var targetUnit=document.getElementById("targetUnit"+i).value;
+            var studentResp=document.getElementById("studentResp"+i).value;
+            var unitOfMeasure = ['fahrenheit','celsius','kelvin','rankine'];
+            console.log("Step 3");
+            if(isNaN(inputNValue)){
+                document.getElementById("ans"+i).innerText="invalid";
+                return;
+            }
+            console.log("Step 2");
+            if(isNaN(studentResp)){
+                document.getElementById("ans"+i).innerText="invalid";
+                return;
+            }
+            console.log("Step 3");
+            if(unitOfMeasure.indexOf(inputUnit.trim())<0){
+                document.getElementById("ans"+i).innerText="invalid";
+                return;
+            }
+            console.log("Step 4");
+            if(unitOfMeasure.indexOf(targetUnit.trim())<0){
+                document.getElementById("ans"+i).innerText="invalid";
+                return;
+            }
+           
+            var calValue=0;
+            if( targetUnit.trim().toLowerCase() == "fahrenheit"){
+                calValue=ToFahrenheit(inputNValue,inputUnit.trim().toLowerCase());
+            }
+            if( targetUnit.trim().toLowerCase() == "celsius"){
+                calValue=ToCelsius(inputNValue,inputUnit.trim().toLowerCase());
+            }
+            if( targetUnit.trim().toLowerCase() == "kelvin"){
+                calValue=ToKelvin(inputNValue,inputUnit.trim().toLowerCase());
+            }
+            if( targetUnit.trim().toLowerCase() == "rankine"){
+                calValue=ToRankine(inputNValue,inputUnit.trim().toLowerCase());
+            }
+
+            if( studentResp == calValue ){
+                document.getElementById("ans"+i).innerText="correct";
+            } else {
+                if(parseFloat(studentResp).toFixed(2)==parseFloat(calValue).toFixed(2)){
+                    document.getElementById("ans"+i).innerText="correct";
+                } else {
+                    document.getElementById("ans"+i).innerText="incorrect";
+                }
+            }
+
+
+        }
+    </script>
+</head>
+    <body>
+        <table>
+            <tr>
+                <td> Input Numerical value</td>
+                <td> Input Unit of Measure</td>
+                <td> Target Unit of Measure</td>
+                <td> Student Response</td>
+                <td> output </td>
+            </tr>
+            <tr>
+                <td> <input type="text" id="inputNValue1" onChange="calResponse(1)" /></td>
+                <td> <input type="text" id="inputUnit1" onChange="calResponse(1)"></td>
+                <td> <input type="text" id="targetUnit1" onChange="calResponse(1)"></td>
+                <td> <input type="text" id="studentResp1" onChange="calResponse(1)"></td>
+                <td> <div id="ans1"></div> </td>
+            </tr>
+            <tr>
+                <td> <input type="text" id="inputNValue2" onChange="calResponse(2)"></td>
+                <td> <input type="text" id="inputUnit2" onChange="calResponse(2)"></td>
+                <td> <input type="text" id="targetUnit2" onChange="calResponse(2)"></td>
+                <td> <input type="text" id="studentResp2" onChange="calResponse(2)"></td>
+                <td> <div id="ans2"></div> </td>
+            </tr>
+            <tr>
+                <td> <input type="text" id="inputNValue3" onChange="calResponse(3)"></td>
+                <td> <input type="text" id="inputUnit3" onChange="calResponse(3)"></td>
+                <td> <input type="text" id="targetUnit3" onChange="calResponse(3)"></td>
+                <td> <input type="text" id="studentResp3" onChange="calResponse(3)"></td>
+                <td> <div id="ans3"></div> </td>
+            </tr>
+        </table>
+      
+    </body>
+</html>
